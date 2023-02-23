@@ -19,4 +19,6 @@ fn check_urls(urls: Vec<&str>) {
 
 fn main() {
     println!("Hello, world!");
+    let urls: Vec<&str> = vec!["192.168.0.1", "google.co.uk", "notaewbsite.com"];
+    check_urls(urls);
 }
