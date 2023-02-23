@@ -49,22 +49,22 @@ fn check_url(url: String) {
 }
 
 pub fn ip_addresses(max: i32) {
-    let latest_url = std::fs::read_to_string("latest.txt").unwrap_or("0.0.0.0".to_string());
+    let latest_url: String = std::fs::read_to_string("latest.txt").unwrap_or("0.0.0.0".to_string());
 
     let latest_parts: Vec<&str> = latest_url.split('.').collect();
-    let mut i = latest_parts[0].parse::<i32>().unwrap();
-    let mut j = latest_parts[1].parse::<i32>().unwrap();
-    let mut k = latest_parts[2].parse::<i32>().unwrap();
-    let mut l = latest_parts[3].parse::<i32>().unwrap();
+    let mut i: i32 = latest_parts[0].parse::<i32>().unwrap();
+    let mut j: i32 = latest_parts[1].parse::<i32>().unwrap();
+    let mut k: i32 = latest_parts[2].parse::<i32>().unwrap();
+    let mut l: i32 = latest_parts[3].parse::<i32>().unwrap();
 
     for _ in i..max {
         for _ in j..max {
             for _ in k..max {
                 for _ in l..max {
                     if i <= 255 && j <= 255 && k <= 255 && l <= 255 {
-                        let url = format!("http://{}.{}.{}.{}", i, j, k, l);
+                        let url: String = format!("http://{}.{}.{}.{}", i, j, k, l);
                         check_url(url);
-                        let url = format!("https://{}.{}.{}.{}", i, j, k, l);
+                        let url: String = format!("https://{}.{}.{}.{}", i, j, k, l);
                         check_url(url);
 
                         l += 1;
