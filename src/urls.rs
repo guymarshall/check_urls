@@ -59,12 +59,16 @@ pub fn ip_addresses(max: i32) {
         for _ in j..max {
             for _ in k..max {
                 for _ in l..max {
-                    let url = format!("http://{}.{}.{}.{}", i, j, k, l);
-                    check_url(url);
-                    let url = format!("https://{}.{}.{}.{}", i, j, k, l);
-                    check_url(url);
+                    if i <= 255 && j <= 255 && k <= 255 && l <= 255 {
+                        let url = format!("http://{}.{}.{}.{}", i, j, k, l);
+                        check_url(url);
+                        let url = format!("https://{}.{}.{}.{}", i, j, k, l);
+                        check_url(url);
 
-                    l += 1;
+                        l += 1;
+                    } else if i > 255 {
+                        return;
+                    }
                 }
                 l = 0;
                 k += 1;
