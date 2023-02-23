@@ -2,7 +2,7 @@ use reqwest::StatusCode;
 
 pub fn check_urls(urls: Vec<String>) {
     for url in urls {
-        match reqwest::blocking::get(url) {
+        match reqwest::blocking::get(&url) {
             Ok(response) => {
                 if response.status() == StatusCode::OK {
                     println!("Success with {}", url);
