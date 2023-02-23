@@ -34,19 +34,17 @@ pub fn check_url(url: String) {
     }
 }
 
-pub fn generate_urls(max: u32) -> Vec<String> {
-    let mut urls = Vec::new();
+pub fn ip_addresses(max: i32) {
     for i in 0..max {
         for j in 0..max {
             for k in 0..max {
                 for l in 0..max {
                     let url = format!("http://{}.{}.{}.{}", i, j, k, l);
-                    urls.push(url);
+                    check_url(url);
                     let url = format!("https://{}.{}.{}.{}", i, j, k, l);
-                    urls.push(url);
+                    check_url(url);
                 }
             }
         }
     }
-    urls
 }
