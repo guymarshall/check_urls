@@ -1,6 +1,6 @@
 use reqwest::StatusCode;
 
-pub fn check_urls(urls: Vec<&str>) {
+pub fn check_urls(urls: Vec<String>) {
     for url in urls {
         match reqwest::blocking::get(url) {
             Ok(response) => {
