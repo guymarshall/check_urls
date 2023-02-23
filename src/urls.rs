@@ -16,3 +16,8 @@ pub fn check_urls(urls: Vec<&str>) {
         }
     }
 }
+
+pub fn generate_url_vector(max: i32) -> Vec<String> {
+    let ip_address_str: String = format!("https://{}.{}.{}.{}", max, max, max, max);
+    vec![ip_address_str]
+}
