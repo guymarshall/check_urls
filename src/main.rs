@@ -8,6 +8,6 @@ mod user_input;
 
 fn main() {
     let max: i32 = input("Enter max for IP check:");
-    let urls: Vec<&str> = vec!["https://google.co.uk", "https://notaewbsite.com"];
+    let urls: Vec<String> = vec!["https://google.co.uk".to_string(), "https://notaewbsite.com".to_string()];
     check_urls(urls);
 }
