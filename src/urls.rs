@@ -2,7 +2,7 @@ use reqwest::StatusCode;
 use std::fs::OpenOptions;
 use std::io::Write;
 
-pub fn check_url(url: String) {
+fn check_url(url: String) {
     let mut success_file = OpenOptions::new()
         .append(true)
         .create(true)
