@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use reqwest::StatusCode;
 
 fn check_urls(urls: Vec<&str>) {
