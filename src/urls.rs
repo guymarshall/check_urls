@@ -2,7 +2,7 @@ use reqwest::StatusCode;
 use std::fs::OpenOptions;
 use std::io::Write;
 
-pub fn check_urls(urls: Vec<String>) {
+pub fn check_url(url: String) {
     let mut success_file = OpenOptions::new()
         .append(true)
         .create(true)
@@ -14,23 +14,21 @@ pub fn check_urls(urls: Vec<String>) {
         .open("failure.txt")
         .unwrap();
 
-    for url in urls {
-        match reqwest::blocking::get(&url) {
-            Ok(response) => {
-                if response.status() == StatusCode::OK {
-                    if let Err(e) = writeln!(success_file, "{}", url) {
-                        eprintln!("Error writing to success file: {}", e);
-                    }
-                } else {
-                    if let Err(e) = writeln!(failure_file, "{} - {}", url, response.status()) {
-                        eprintln!("Error writing to failure file: {}", e);
-                    }
+    match reqwest::blocking::get(&url) {
+        Ok(response) => {
+            if response.status() == StatusCode::OK {
+                if let Err(e) = writeln!(success_file, "{}", url) {
+                    eprintln!("Error writing to success file: {}", e);
                 }
-            },
-            Err(error) => {
-                if let Err(e) = writeln!(failure_file, "{} - {}", url, error) {
+            } else {
+                if let Err(e) = writeln!(failure_file, "{} - {}", url, response.status()) {
                     eprintln!("Error writing to failure file: {}", e);
                 }
+            }
+        },
+        Err(error) => {
+            if let Err(e) = writeln!(failure_file, "{} - {}", url, error) {
+                eprintln!("Error writing to failure file: {}", e);
             }
         }
     }
