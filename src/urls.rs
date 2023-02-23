@@ -1,3 +1,5 @@
+#![forbid(unsafe_code)]
+
 use reqwest::StatusCode;
 use std::fs::OpenOptions;
 use std::io::Write;
