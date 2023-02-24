@@ -1,8 +1,9 @@
 #![forbid(unsafe_code)]
 
-use reqwest::StatusCode;
+use reqwest::{StatusCode, blocking};
 use std::fs::OpenOptions;
 use std::io::Write;
+use std::time::Duration;
 
 fn check_url(url: String) {
     let mut success_file = OpenOptions::new()
@@ -17,8 +18,12 @@ fn check_url(url: String) {
         .open("latest.txt")
         .unwrap();
 
-    // add max timeout of 5 seconds
-    match reqwest::blocking::get(&url) {
+    let client = blocking::Client::builder()
+        .timeout(Duration::from_secs(5))
+        .build()
+        .unwrap();
+
+    match client.get(url.clone()).send() {
         Ok(response) => {
             println!("Success: {}", &url);
             if response.status() == StatusCode::OK {
