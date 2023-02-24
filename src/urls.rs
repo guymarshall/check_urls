@@ -10,12 +10,6 @@ fn check_url(url: String) {
         .create(true)
         .open("success.txt")
         .unwrap();
-    let mut failure_file = OpenOptions::new()
-        .append(true)
-        .create(true)
-        .open("failure.txt")
-        .unwrap();
-    // Open the latest file with write access and truncate it
     let mut latest_file = OpenOptions::new()
         .write(true)
         .create(true)
@@ -31,17 +25,10 @@ fn check_url(url: String) {
                 if let Err(e) = writeln!(success_file, "{}", url) {
                     eprintln!("Error writing to success file: {}", e);
                 }
-            } else {
-                if let Err(e) = writeln!(failure_file, "{} - {}", url, response.status()) {
-                    eprintln!("Error writing to failure file: {}", e);
-                }
             }
         },
         Err(error) => {
             println!("Error: {}", &url);
-            if let Err(e) = writeln!(failure_file, "{} - {}", url, error) {
-                eprintln!("Error writing to failure file: {}", e);
-            }
         }
     }
 
