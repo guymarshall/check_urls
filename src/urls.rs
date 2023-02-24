@@ -25,6 +25,7 @@ fn check_url(url: String) {
 
     match reqwest::blocking::get(&url) {
         Ok(response) => {
+            println!("Success: {}", &url);
             if response.status() == StatusCode::OK {
                 if let Err(e) = writeln!(success_file, "{}", url) {
                     eprintln!("Error writing to success file: {}", e);
@@ -36,6 +37,7 @@ fn check_url(url: String) {
             }
         },
         Err(error) => {
+            println!("Error: {}", &url);
             if let Err(e) = writeln!(failure_file, "{} - {}", url, error) {
                 eprintln!("Error writing to failure file: {}", e);
             }
