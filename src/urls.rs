@@ -44,9 +44,13 @@ fn check_url(url: String) {
 }
 
 pub fn ip_addresses(max: i32) {
-    let latest_url: String = std::fs::read_to_string("latest.txt").unwrap_or("0.0.0.0".to_string());
-
+    let mut latest_url: String = String::new();
+    if let Ok(contents) = std::fs::read_to_string("latest.txt") {
+        latest_url = contents.trim().to_string();
+    }
+    let latest_url: &str = latest_url.trim_start_matches("http://").trim_start_matches("https://");
     let latest_parts: Vec<&str> = latest_url.split('.').collect();
+
     let mut i: i32 = latest_parts[0].parse::<i32>().unwrap();
     let mut j: i32 = latest_parts[1].parse::<i32>().unwrap();
     let mut k: i32 = latest_parts[2].parse::<i32>().unwrap();
