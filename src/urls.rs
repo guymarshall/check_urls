@@ -19,7 +19,7 @@ fn check_url(url: String) {
         .unwrap();
 
     let client = blocking::Client::builder()
-        .timeout(Duration::from_millis(10))
+        .timeout(Duration::from_secs(5))
         .build()
         .unwrap();
 
