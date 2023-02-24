@@ -56,10 +56,10 @@ pub fn ip_addresses(max: i32) {
     let mut k: i32 = latest_parts[2].parse::<i32>().unwrap();
     let mut l: i32 = latest_parts[3].parse::<i32>().unwrap();
 
-    for _ in i..max {
-        for _ in j..max {
-            for _ in k..max {
-                for _ in l..max {
+    for _ in i..=max {
+        for _ in j..=max {
+            for _ in k..=max {
+                for _ in l..=max {
                     if i <= 255 && j <= 255 && k <= 255 && l <= 255 {
                         let url: String = format!("http://{}.{}.{}.{}", i, j, k, l);
                         check_url(url);
