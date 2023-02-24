@@ -51,10 +51,12 @@ pub fn ip_addresses(max: i32) {
     let latest_url: &str = latest_url.trim_start_matches("http://").trim_start_matches("https://");
     let latest_parts: Vec<&str> = latest_url.split('.').collect();
 
-    let mut i: i32 = latest_parts[0].parse::<i32>().unwrap();
-    let mut j: i32 = latest_parts[1].parse::<i32>().unwrap();
-    let mut k: i32 = latest_parts[2].parse::<i32>().unwrap();
-    let mut l: i32 = latest_parts[3].parse::<i32>().unwrap();
+    let length: i32 = latest_parts.len().try_into().unwrap();
+
+    let mut i: i32 = if length == 4 {latest_parts[0].parse::<i32>().unwrap_or(0)} else {0};
+    let mut j: i32 = if length == 4 {latest_parts[1].parse::<i32>().unwrap_or(0)} else {0};
+    let mut k: i32 = if length == 4 {latest_parts[2].parse::<i32>().unwrap_or(0)} else {0};
+    let mut l: i32 = if length == 4 {latest_parts[3].parse::<i32>().unwrap_or(0)} else {0};
 
     for _ in i..=max {
         for _ in j..=max {
