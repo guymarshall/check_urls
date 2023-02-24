@@ -23,6 +23,7 @@ fn check_url(url: String) {
         .open("latest.txt")
         .unwrap();
 
+    // add max timeout of 5 seconds
     match reqwest::blocking::get(&url) {
         Ok(response) => {
             println!("Success: {}", &url);
