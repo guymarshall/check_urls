@@ -54,32 +54,22 @@ pub fn ip_addresses(max: i32) {
     let length: i32 = latest_parts.len().try_into().unwrap();
 
     let mut i: i32 = if length == 4 {latest_parts[0].parse::<i32>().unwrap_or(0)} else {0};
-    let mut j: i32 = if length == 4 {latest_parts[1].parse::<i32>().unwrap_or(0)} else {0};
-    let mut k: i32 = if length == 4 {latest_parts[2].parse::<i32>().unwrap_or(0)} else {0};
-    let mut l: i32 = if length == 4 {latest_parts[3].parse::<i32>().unwrap_or(0)} else {0};
 
     for _ in i..=max {
-        for _ in j..=max {
-            for _ in k..=max {
-                for _ in l..=max {
+        for j in 0..=max {
+            for k in 0..=max {
+                for l in 0..=max {
                     if i <= 255 && j <= 255 && k <= 255 && l <= 255 {
                         let url: String = format!("http://{}.{}.{}.{}", i, j, k, l);
                         check_url(url);
                         let url: String = format!("https://{}.{}.{}.{}", i, j, k, l);
                         check_url(url);
-
-                        l += 1;
                     } else if i > 255 {
                         return;
                     }
                 }
-                l = 0;
-                k += 1;
             }
-            k = 0;
-            j += 1;
         }
-        j = 0;
         i += 1;
     }
 }
