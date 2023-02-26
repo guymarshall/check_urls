@@ -37,7 +37,6 @@ fn check_url(url: String) {
         }
     }
 
-    // Write the latest URL to the latest file
     if let Err(e) = writeln!(latest_file, "{}", url) {
         eprintln!("Error writing to latest file: {}", e);
     }
