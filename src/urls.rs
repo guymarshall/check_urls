@@ -43,7 +43,8 @@ fn check_url(url: String) {
     }
 }
 
-pub fn ip_addresses(max: i32) {
+pub fn ip_addresses() {
+    const MAX: i32 = 255;
     let mut latest_url: String = String::new();
     if let Ok(contents) = std::fs::read_to_string("latest.txt") {
         latest_url = contents.trim().to_string();
@@ -55,10 +56,10 @@ pub fn ip_addresses(max: i32) {
 
     let mut i: i32 = if length == 4 {latest_parts[0].parse::<i32>().unwrap_or(0)} else {0};
 
-    for _ in i..=max {
-        for j in 0..=max {
-            for k in 0..=max {
-                for l in 0..=max {
+    for _ in i..=MAX {
+        for j in 0..=MAX {
+            for k in 0..=MAX {
+                for l in 0..=MAX {
                     if i <= 255 && j <= 255 && k <= 255 && l <= 255 {
                         let url: String = format!("http://{}.{}.{}.{}", i, j, k, l);
                         check_url(url);
