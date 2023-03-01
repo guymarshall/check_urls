@@ -32,7 +32,8 @@ fn check_url(url: String) {
                 }
             }
         },
-        Err(_) => {
+        Err(err) => {
+            println!("Error: {}", err);
         }
     }
 
