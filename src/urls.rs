@@ -7,7 +7,7 @@ use std::time::Duration;
 use reqwest::blocking::Client;
 
 fn create_success_file() -> File {
-    let mut success_file = OpenOptions::new()
+    let success_file = OpenOptions::new()
         .append(true)
         .create(true)
         .open("success.txt")
