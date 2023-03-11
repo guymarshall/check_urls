@@ -11,12 +11,6 @@ fn check_url(url: String) {
         .create(true)
         .open("success.txt")
         .unwrap();
-    let mut latest_file = OpenOptions::new()
-        .write(true)
-        .create(true)
-        .truncate(true)
-        .open("latest.txt")
-        .unwrap();
 
     let client = blocking::Client::builder()
         .timeout(Duration::from_secs(5))
@@ -35,10 +29,6 @@ fn check_url(url: String) {
         Err(err) => {
             println!("Error: {}", err);
         }
-    }
-
-    if let Err(e) = writeln!(latest_file, "{}", url) {
-        eprintln!("Error writing to latest file: {}", e);
     }
 }
 
