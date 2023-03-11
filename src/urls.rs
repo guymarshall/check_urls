@@ -7,7 +7,7 @@ use std::time::Duration;
 use reqwest::blocking::Client;
 
 fn create_success_file() -> File {
-    let success_file = OpenOptions::new()
+    let success_file: File = OpenOptions::new()
         .append(true)
         .create(true)
         .open("success.txt")
@@ -16,7 +16,7 @@ fn create_success_file() -> File {
 }
 
 fn create_client() -> Client {
-    let client = Client::builder()
+    let client: Client = Client::builder()
         .timeout(Duration::from_secs(5))
         .build()
         .unwrap();
@@ -40,8 +40,8 @@ fn check_url(url: String, success_file: &mut File, client: &Client) {
 }
 
 pub fn ip_addresses() {
-    let mut success_file = create_success_file();
-    let client = create_client();
+    let mut success_file: File = create_success_file();
+    let client: Client = create_client();
 
     const MAX: i32 = 255;
     let mut latest_url: String = String::new();
