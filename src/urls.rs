@@ -1,6 +1,6 @@
 #![forbid(unsafe_code)]
 
-use reqwest::{StatusCode, blocking};
+use reqwest::StatusCode;
 use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::time::Duration;
