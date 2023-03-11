@@ -45,7 +45,7 @@ fn check_url(url: String) {
 pub fn ip_addresses() {
     const MAX: i32 = 255;
     let mut latest_url: String = String::new();
-    if let Ok(contents) = std::fs::read_to_string("latest.txt") {
+    if let Ok(contents) = std::fs::read_to_string("success.txt") {
         latest_url = contents.trim().to_string();
     }
     let latest_url: &str = latest_url.trim_start_matches("http://").trim_start_matches("https://");
