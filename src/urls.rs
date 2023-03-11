@@ -16,7 +16,7 @@ fn create_success_file() -> File {
 }
 
 fn create_client() -> Client {
-    let client = blocking::Client::builder()
+    let client = Client::builder()
         .timeout(Duration::from_secs(5))
         .build()
         .unwrap();
