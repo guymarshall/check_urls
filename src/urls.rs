@@ -1,22 +1,29 @@
 #![forbid(unsafe_code)]
 
 use reqwest::{StatusCode, blocking};
-use std::fs::OpenOptions;
+use std::fs::{File, OpenOptions};
 use std::io::Write;
 use std::time::Duration;
+use reqwest::blocking::Client;
 
-fn check_url(url: String) {
+fn create_success_file() -> File {
     let mut success_file = OpenOptions::new()
         .append(true)
         .create(true)
         .open("success.txt")
         .unwrap();
+    success_file
+}
 
+fn create_client() -> Client {
     let client = blocking::Client::builder()
         .timeout(Duration::from_secs(5))
         .build()
         .unwrap();
+    client
+}
 
+fn check_url(url: String, success_file: &mut File, client: &Client) {
     match client.get(url.clone()).send() {
         Ok(response) => {
             println!("Success: {}", &url);
@@ -33,6 +40,9 @@ fn check_url(url: String) {
 }
 
 pub fn ip_addresses() {
+    let mut success_file = create_success_file();
+    let client = create_client();
+
     const MAX: i32 = 255;
     let mut latest_url: String = String::new();
     if let Ok(contents) = std::fs::read_to_string("success.txt") {
@@ -54,9 +64,9 @@ pub fn ip_addresses() {
                 for _ in l..MAX {
                     if i <= 255 && j <= 255 && k <= 255 && l <= 255 {
                         let url: String = format!("http://{}.{}.{}.{}", i, j, k, l);
-                        check_url(url);
+                        check_url(url, &mut success_file, &client);
                         let url: String = format!("https://{}.{}.{}.{}", i, j, k, l);
-                        check_url(url);
+                        check_url(url, &mut success_file, &client);
 
                         l += 1;
                     } else if i > 255 {
