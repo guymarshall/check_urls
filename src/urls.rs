@@ -43,7 +43,7 @@ pub fn ip_addresses() {
     let mut success_file: File = create_success_file();
     let client: Client = create_client();
 
-    const MAX: i32 = 255;
+    const MAX: i32 = 256;
     let mut latest_url: String = String::new();
     if let Ok(contents) = std::fs::read_to_string("success.txt") {
         latest_url = contents.trim().to_string();
