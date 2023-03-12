@@ -62,14 +62,14 @@ pub fn ip_addresses() {
         for _ in j..MAX {
             for _ in k..MAX {
                 for _ in l..MAX {
-                    if i <= 255 && j <= 255 && k <= 255 && l <= 255 {
+                    if i <= MAX && j <= MAX && k <= MAX && l <= MAX {
                         let url: String = format!("http://{}.{}.{}.{}", i, j, k, l);
                         check_url(url, &mut success_file, &client);
                         let url: String = format!("https://{}.{}.{}.{}", i, j, k, l);
                         check_url(url, &mut success_file, &client);
 
                         l += 1;
-                    } else if i > 255 {
+                    } else if i > MAX {
                         return;
                     }
                 }
